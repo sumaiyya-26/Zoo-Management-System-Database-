@@ -1,0 +1,319 @@
+create table zoo
+(
+  zoo_id number primary key,
+  zoo_name varchar(100),
+  city varchar(100),
+  cages number
+);
+
+INSERT INTO zoo VALUES (10003, 'Sri Venkateswara Zoological Park', 'Tirupati', 69); 
+INSERT INTO zoo VALUES (10004, 'Kakatiya Zoological Park', 'Hanmakonda', 102); 
+INSERT INTO zoo VALUES (10007, 'Nehru Zoological Park', 'Hyderabad', 43); 
+INSERT INTO zoo VALUES (10009, 'Indira Gandhi Zoological Park', 'Visakhapatnam',39);
+select * from zoo;
+
+
+
+
+
+
+
+create table taxonomy
+(   
+    a_order varchar(100) primary key,
+    a_class varchar(100)
+); 
+
+INSERT INTO taxonomy VALUES ('Anura', 'Amphibia'); 
+INSERT INTO taxonomy VALUES ('Artiodactyla', 'Mammalia');
+ INSERT INTO taxonomy VALUES ('Cardiida', 'invertebrate'); 
+INSERT INTO taxonomy VALUES ('Carnivora', 'Mammalia');
+ INSERT INTO taxonomy VALUES ('Casuariiformes', 'Aves');
+ INSERT INTO taxonomy VALUES ('Ciconiiformes', 'Aves'); 
+INSERT INTO taxonomy VALUES ('Crocodilia', 'Reptilia'); 
+INSERT INTO taxonomy VALUES ('Cyclopoida', 'Hexanauplia');
+ INSERT INTO taxonomy VALUES ('Decapoda', 'invertebrate'); 
+INSERT INTO taxonomy VALUES ('Galliformes', 'Aves'); 
+select * from taxonomy;
+
+
+
+
+
+
+
+
+
+create table animal_kind
+(
+  animalk_id NUMBER primary key,
+  general_name varchar(100),
+  species varchar(100),
+  a_order varchar(100),
+  foreign key(a_order) references taxonomy(a_order),
+  status  varchar(10)
+);
+INSERT INTO animal_kind VALUES (105001, 'Bengal Tiger', 'Panthera tigris tigris', 'Carnivora', 'EN');
+ INSERT INTO animal_kind VALUES (105002, 'African Lion', 'Panthera leo leo', 'Carnivora', 'VU');
+ INSERT INTO animal_kind VALUES (105003, 'Chimpanzee', 'Pan troglodytes', 'primate', 'EN'); 
+INSERT INTO animal_kind VALUES (106001, 'King Cobra', 'Ophiophagus hannah', 'serpentes', 'VU'); 
+INSERT INTO animal_kind VALUES (102001, 'Openbill Stork', 'Anastomus oscitans', 'Ciconiiformes', 'LC');
+ INSERT INTO animal_kind VALUES (101001, 'Red Eye Tree Frog', 'Agalychnis callidryas', 'Anura', 'LC'); 
+INSERT INTO animal_kind VALUES (101002, 'Asiatic salamanders', 'Hynobius oyamai', 'Urodela', 'VU'); 
+INSERT INTO animal_kind VALUES (103001, 'Lined Seahorse', 'Hippocampus erectus', 'Syngnathiformes', 'VU'); 
+INSERT INTO animal_kind VALUES (101003, 'Axolotl', 'Ambystoma mexicanum', 'Urodela', 'CR'); 
+INSERT INTO animal_kind VALUES (104001, 'Crustaceans', 'Acanthocyclops hypogeus', 'Cyclopoida', 'VU'); 
+select * from animal_kind;
+
+
+
+
+
+
+create table animal
+(
+  animal_id number primary key,
+  animal_name varchar(100),
+  cage_no number,
+  height number,
+  weight number,
+  age number,
+  gender varchar(10),
+  origin varchar(100),
+  animalk_id NUMBER,
+  FOREIGN KEY (animalk_id) REFERENCES animal_kind(animalk_id),
+  zoo_id number,
+  FOREIGN KEY(zoo_id) REFERENCES zoo(zoo_id)
+);
+INSERT INTO animal VALUES (30001, 'Kinf Cobra', 101, 23, 1, 2, 'M', 'North america', 105001, 10009); 
+INSERT INTO animal VALUES (30002, 'Monkey', 102, 31, 15, 9, 'M', 'africa', 105002, 10009); 
+INSERT INTO animal VALUES (30004, 'Alligator', 104, 60, 19, 5, 'M ', 'india', 102001, 10003); 
+INSERT INTO animal VALUES (30005, 'Elephant', 105, 188, 430, 21, 'F', 'North america', 101001, 10003); 
+INSERT INTO animal VALUES (30006, 'Hyena', 106, 265, 11, 8, 'M', 'india', 104001, 10004); 
+INSERT INTO animal VALUES (30007, 'Ostrich', 107, 90, 7, 6, 'F', 'UK', 105001, 10004); 
+INSERT INTO animal VALUES (30008, 'Hippopotamus', 108, 305, 11, 5, 'M', 'india', 102001, 10007);
+INSERT INTO animal VALUES (30009, 'Zebra', 109, 168, 43, 11, 'M', 'Australia', 105002, 10003); 
+INSERT INTO animal VALUES (30010, 'PeaCock', 110, 22, 23, 2, 'F', 'North america', 104001, 10009); 
+INSERT INTO animal VALUES (30011, 'White Tiger', 111, 130, 245, 7, 'M', 'india', 101001, 10003);
+select * from animal;
+
+
+
+
+
+
+create table location
+(
+  city varchar(100) primary key,
+  state varchar(100)
+);
+INSERT INTO location VALUES ('Hyderabad', 'Telangana');
+INSERT INTO location VALUES ('Warangal', 'Telanagana');
+INSERT INTO location VALUES ('Visakhapatnam', 'Andhara pradesh');
+INSERT INTO location VALUES ('Tirupathi', 'Andhara pradesh'); 
+select * from LOCATION;
+
+
+
+
+
+
+create table pincode
+(
+  pinnum number primary key,
+  street varchar(100),
+  city varchar(100),
+  FOREIGN KEY (city) REFERENCES location(city)
+);
+INSERT INTO pincode VALUES (500002, 'Dilshuknagar', 'Hyderabad'); 
+INSERT INTO pincode VALUES (500016, 'Banjara Hills', 'Hyderabad'); 
+INSERT INTO pincode VALUES (500060, 'Vidyanagar', 'Hyderabad');
+ INSERT INTO pincode VALUES (500069, 'Miyapur', 'Hyderabad');
+INSERT INTO pincode VALUES (500125, 'Kukatpalli', 'Hyderabad'); 
+INSERT INTO pincode VALUES (600004, 'Kazipet', 'Warangal');
+ INSERT INTO pincode VALUES (600008, 'Subedari', 'Warangal'); 
+INSERT INTO pincode VALUES (600021, 'LB nagar', 'Warangal'); 
+INSERT INTO pincode VALUES (600035, 'Shambunipet', 'Warangal');
+INSERT INTO pincode VALUES (600055, 'Hanmakonda', 'Warangal'); 
+select * from pincode;
+
+
+
+
+
+
+
+create table employee
+(
+  emp_id number primary key,
+  emp_fname varchar(100),
+  emp_mname varchar(100),
+  emp_lname varchar(100),
+  salary number,
+  zoo_id number,
+  FOREIGN KEY (zoo_id)REFERENCES zoo(zoo_id),
+  pinnum number,
+  foreign key (pinnum) REFERENCES pincode(pinnum)
+);
+INSERT INTO employee VALUES (1001, 'Raghu', 'Phanesh', 'sanitary', 60000, 10004, 500001); 
+INSERT INTO employee VALUES (1002, 'Sankar', 'kolapali', 'security', 15000, 10009,500016);
+INSERT INTO employee VALUES (1003, 'Samvidha', 'jaaron', 'cagekeeper', 15000, 10007, 600055); 
+INSERT INTO employee VALUES (1004, 'Rohith', 'pinnamraju', 'gatekeeper', 15000, 10004, 500125); 
+INSERT INTO employee VALUES (1005, 'naveen', 'allu ratna', 'cagekeeper', 15000, 10003, 500125); 
+INSERT INTO employee VALUES (1006, 'varun', 'reddy', 'cagekeeper', 20000, 10007, 500125); 
+INSERT INTO employee VALUES (1007, 'rajesh', 'Amaragani', 'cagekeeper', 15000, 10009, 600021);
+INSERT INTO employee VALUES (1008, 'Waseem', 'Agarwal', 'cagekeeper', 15000, 10003, 500001); 
+INSERT INTO employee VALUES (1009, 'vinay ', 'Gundapalli', 'cagekeeper', 20000, 10009, 600008); 
+INSERT INTO employee VALUES (1010, 'shiva reddy', 'ramala', 'cagekeeper', 20000, 10007, 600055); 
+select * from employee;
+
+
+
+
+
+
+create table contact
+(  
+  emp_id number,
+  FOREIGN KEY (emp_id) REFERENCES employee(emp_id),
+  phone_no number
+);   
+INSERT INTO contact VALUES (1001, 8741122565); 
+INSERT INTO contact VALUES (1002, 6179485234); 
+INSERT INTO contact VALUES (1003, 7849562134); 
+INSERT INTO contact VALUES (1004, 9844565225);
+INSERT INTO contact VALUES (1005, 9848522338);
+INSERT INTO contact VALUES (1006, 6320154879); 
+INSERT INTO contact VALUES (1007, 8484879111);
+INSERT INTO contact VALUES (1008, 9787488845);
+INSERT INTO contact VALUES (1009, 9784684135);
+INSERT INTO contact VALUES (1010, 7454846513); 
+select * from CONTACT;
+
+
+
+
+
+
+
+create table visitor
+( 
+  v_id number PRIMARY KEY,
+  phone_no number,
+  pinnum number,
+  foreign key (pinnum) references pincode(pinnum),
+  v_fname varchar(100),
+  v_lname varchar(100)
+);
+
+INSERT INTO visitor VALUES (1000002, 8247423616, 500001, 'Sandhya', 'Dhanavath');
+INSERT INTO visitor VALUES (1000003, 9848522338, 500002, 'Shankar', 'Tejavath');
+INSERT INTO visitor VALUES (1000004, 7532148967, 500060, 'Waseem', 'Syed' );
+INSERT INTO visitor VALUES (1000005, 6459783120, 500125, 'Manoj', 'Boganadham');
+INSERT INTO visitor VALUES (1000006, 8524615397, 500069, 'Infi', 'Chan');
+INSERT INTO visitor VALUES (1000007, 9754125896, 600004, 'Bhushank', 'Kul');
+INSERT INTO visitor VALUES (1000008, 8462157930, 600055, 'Abhiram', 'Nallama'); 
+INSERT INTO visitor VALUES (1000009, 6841759325, 600008, 'Ashish', 'Anand');
+INSERT INTO visitor VALUES (1000010, 8945632178, 600154, 'Lakshita', 'Chowdary');
+INSERT INTO visitor VALUES (1000011, 9685741232, 600035, 'Nayan', 'Jyothi'); 
+INSERT INTO visitor VALUES (1000012, 8675941236, 600021, 'Ranil', 'Bala'); 
+INSERT INTO visitor VALUES (1000013, 7849562134, 600154, 'Tanisha', 'Agarwal');
+select * from visitor;
+
+
+
+
+
+
+
+
+
+
+
+
+create table purchase
+(
+    purchase_id number primary key,
+    purchase_name varchar(100)
+);    
+insert into purchase values(102,'Credit Card');
+insert into purchase values(103,'Cash');
+insert into purchase values(104,'UPI');
+insert into purchase values(105,'e-wallets');
+select * from purchase;
+
+
+
+
+
+
+create table ticket
+(
+    ticket_id number primary key,
+    ticket_date varchar,
+    v_id number,
+    FOREIGN KEY (v_id) REFERENCES visitor(v_id),
+    purchase_id number,
+    FOREIGN KEY (purchase_id) REFERENCES purchase(purchase_id),
+    zoo_id number,
+    FOREIGN KEY (zoo_id) REFERENCES zoo(zoo_id)
+);
+INSERT INTO ticket VALUES (9034351, '15-08-2020', 1000002, 104, 10004); 
+INSERT INTO ticket VALUES (2110003, '15-02-2020', 1000003, 104, 10007);
+INSERT INTO ticket VALUES (6382682, '15-02-2020', 1000004, 103, 10003);
+INSERT INTO ticket VALUES (6824217, '14-02-2020', 1000005, 102, 10007); 
+INSERT INTO ticket VALUES (5193139, '15-02-2020', 1000006, 103, 10009);
+INSERT INTO ticket VALUES (5542291, '14-02-2020', 1000007, 102, 10003);
+INSERT INTO ticket VALUES (2580752, '14-02-2020', 1000008, 104, 10007); 
+INSERT INTO ticket VALUES (9154961, '15-02-2020', 1000009, 102, 10007); 
+INSERT INTO ticket VALUES (8391607, '14-02-2020', 1000010, 101, 10007); 
+INSERT INTO ticket VALUES (1329791, '14-02-2020', 1000011, 102, 10007);
+select * from ticket;
+
+
+
+
+
+
+
+create table looks_after
+(   
+     animal_id number,
+     FOREIGN kEY (animal_id) REFERENCES animal(animal_id),
+     emp_id number,
+     FOREIGN KEY (emp_id) REFERENCES employee(emp_id)
+);
+INSERT INTO looks_after(animal_id, emp_id) VALUES (30010, 1002);
+ INSERT INTO looks_after(animal_id, emp_id) VALUES (30004, 1003);
+INSERT INTO looks_after(animal_id, emp_id) VALUES (30005, 1004);
+INSERT INTO looks_after(animal_id, emp_id) VALUES (30006, 1005);
+INSERT INTO looks_after(animal_id, emp_id) VALUES (30007, 1006);
+ INSERT INTO looks_after(animal_id, emp_id) VALUES (30008, 1007); 
+INSERT INTO looks_after(animal_id, emp_id) VALUES (30009, 1000); 
+INSERT INTO looks_after(animal_id, emp_id) VALUES (30011, 1010); 
+INSERT INTO looks_after(animal_id, emp_id) VALUES (30001, 1009);
+INSERT INTO looks_after(animal_id, emp_id) VALUES (30002, 1010);
+select * from looks_after;
+
+
+
+
+
+
+
+
+create table visits
+(
+     ticket_id number ,
+     FOREIGN KEY (ticket_id) REFERENCES ticket(ticket_id),
+     in_time TIMESTAMP,
+     out_time TIMESTAMP
+)
+INSERT INTO visits VALUES (1329791, to_timestamp('16/02/2020 10:53:10', 'dd/mm/yyyy HH24:MI:SS'),to_timestamp( '16/02/2020 16:53:15','dd/mm/yyyy HH24:MI:SS'));
+INSERT INTO visits VALUES (9154961, to_timestamp('2020-02-16 10:53:45','yyyy/mm/dd HH24:MI:SS'), to_timestamp('2020-02-16 16:07:41','yyyy/mm/dd HH24:MI:SS'));
+INSERT INTO visits VALUES (5542291, TO_TIMESTAMP('2020/02/16 10:45:55','yyyy/mm/dd HH24:MI:SS'), TO_TIMESTAMP('2020/02/16 16:05:09','yyyy/mm/dd HH24:MI:SS'));
+INSERT INTO visits VALUES (5193139, TO_TIMESTAMP('2020/02/16 10:57:30','yyyy/mm/dd HH24:MI:SS'), TO_TIMESTAMP('2020/02/16 16:07:11','yyyy/mm/dd HH24:MI:SS'));
+INSERT INTO visits VALUES (6824217, TO_TIMESTAMP('2020/02/16 10:59:37','yyyy/mm/dd HH24:MI:SS'), TO_TIMESTAMP('2020/02/16 16:49:04','yyyy/mm/dd HH24:MI:SS'));
+INSERT INTO visits VALUES (2110003, TO_TIMESTAMP('2020/02/16 10:35:55','yyyy/mm/dd HH24:MI:SS'), TO_TIMESTAMP('2020/02/16 16:39:35','yyyy/mm/dd HH24:MI:SS'));
+INSERT INTO visits VALUES (6382682, TO_TIMESTAMP('2020/02/16 10:19:33','yyyy/mm/dd HH24:MI:SS'), TO_TIMESTAMP('2020/02/16 16:37:00','yyyy/mm/dd HH24:MI:SS')); 
+select * from visits;
